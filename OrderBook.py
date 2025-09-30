@@ -100,6 +100,8 @@ if __name__ == "__main__":
         elif action == "show":
             print("Order Map:", book.order_map)
             print("Trades:", book.trades)
+            print("Best Bid (Price, ID, qty):", book.best_bid())
+            print("Best Ask (Price, ID, qty):", book.best_ask())
             print("Book Snapshot:", book.show_book())
 
         elif action == "quit":
