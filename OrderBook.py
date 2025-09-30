@@ -61,7 +61,7 @@ class OrderBook:
         elif side == "sell":
             while remaining > 0 and self.bids and (-self.bids[0][0]) >= price:
                 bid_price_neg, bid_id, bid_qty = self.bids[0]
-                bid_price = bid_price_neg
+                bid_price = -bid_price_neg
                 fill = min(remaining, bid_qty)
 
                 self.trades.append((fill, bid_price, order_id, bid_id))
