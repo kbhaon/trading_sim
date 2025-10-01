@@ -20,10 +20,17 @@ class OrderBook:
         return order_id
     
     def best_bid(self):
-        return None if not self.bids else (-self.bids[0][0], self.bids[0][1], self.bids[0][2])
+        if not self.bids:
+            return None
+        else:
+            return [-self.bids[0][0], self.bids[0][1], self.bids[0][2]]
+    
     
     def best_ask(self):
-        return None if not self.asks else (self.asks[0][0], self.asks[0][1], self.asks[0][2])
+        if not self.asks:
+            return None
+        else:
+            return [self.asks[0][0], self.asks[0][1], self.asks[0][2]]
     
     def show_book(self):
         bids_sorted = sorted([(-p, q) for (p, _, q) in self.bids], reverse=True)
@@ -91,17 +98,42 @@ if __name__ == "__main__":
         action = input("Enter action (order/show/quit): ").strip().lower()
 
         if action == "order":
-            side = input("Side (buy/sell): ").strip().lower()
-            price = float(input("Price: "))
-            qty = int(input("Quantity: "))
+            while True:
+                    side = input("Side (buy/sell): ").strip().lower()
+                    if side in ("buy", "sell"):
+                        break
+                    else: print("Invalid input. Use 'buy' or 'sell'.")
+
+            while True:
+                    try:
+                        price = float(input("Price: "))
+                        if price > 0:
+                            break
+                        else:
+                            print("Invalid input. Please put a value above 0.")
+                    except ValueError:
+                        print("Invalid number. please enter a positive number greater than 0")
+
+            while True:
+                    try:
+                        qty = int(input("Quantity: "))
+                        if qty > 0:
+                            break
+                        else:
+                            print("Invalid input. Please put a value above 0.")
+                    except ValueError:
+                        print("Invalid number. please enter a positive number greater than 0")
+                
             order_id = book.add_order(side, price, qty)
             print(f"Order {order_id} added: {side} {qty}@{price}")
 
         elif action == "show":
+            bb = book.best_bid()
+            ba = book.best_ask()
             print("Order Map:", book.order_map)
             print("Trades:", book.trades)
-            print("Best Bid (Price, ID, qty):", book.best_bid())
-            print("Best Ask (Price, ID, qty):", book.best_ask())
+            print("Best Bid Price ($): " + str(bb[0]) if bb != None else "Best Bid Price ($): -")
+            print("Best Ask Price ($): " + str(ba[0]) if ba != None else "Best Bid Price ($): -")
             print("Book Snapshot:", book.show_book())
 
         elif action == "quit":
