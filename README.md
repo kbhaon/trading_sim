@@ -15,11 +15,4 @@
 - **Make the show tab more readable**
   - specify which each number in the tuples/dictionaries (trades, best bids/asks, book snapshots) is in a cleaner way. Unless you read the code or pay a lot of attention to all the order IDs, quantities, etc. you wont really know what most of the numbers are when you show the book.
 
-- **Simulate a market by adding randomized orders at random intervals**
-  - I will try and set it so the standard deviation is not super large with caps of order sizes and amounts. I don't want random orders of 1 million @ $1000000 being likely.
-  - I am envisioning this to be like a random number generator with some price bias that will be predetermined. Maybe I can make this bias slowly shift as well.
-
-- **Move UI to streamlit for easier visibility and use**
-  - This will make it a bit more user friendly and would let me implement live graphs and constantly refreshing current prices.
-  - I will do this after I am a bit more happy with my CLI though.
 
