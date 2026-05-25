@@ -1,4 +1,4 @@
-# Trading Sim — Limit Order Book
+# Limit Order Book
 
 A small, dependency-free Python simulation of a price–time-priority **limit order book** with a
 matching engine and an interactive command-line interface. Submit buy and sell orders, watch them
